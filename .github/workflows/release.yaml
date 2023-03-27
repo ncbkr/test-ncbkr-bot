@@ -16,10 +16,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
-#      - name: Install dependencies
-#        run: npm ci
+
+      - name: workflow-application-token-action
+        uses: peter-murray/workflow-application-token-action@v2.1.0
+        with:
+          application_id: ${{ secrets.APPLICATION_ID }}
+          application_private_key: ${{ secrets.APPLICATION_PRIVATE_KEY }}
+
       - name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
         run: npx semantic-release
