@@ -18,6 +18,7 @@ jobs:
           node-version: "lts/*"
 
       - name: workflow-application-token-action
+        id: get_workflow_token
         uses: peter-murray/workflow-application-token-action@v2.1.0
         with:
           application_id: ${{ secrets.APPLICATION_ID }}
